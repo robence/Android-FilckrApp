@@ -1,10 +1,12 @@
 package com.robence.flickrapp;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 2017.10.10..
  */
 
-class Photo {
+class Photo implements Serializable{
 
     private String mTitle;
     private String mAuthor;

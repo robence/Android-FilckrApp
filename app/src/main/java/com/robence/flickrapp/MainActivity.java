@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity implements GetFlickrJsonData.OnDa
         super.onResume();
         GetFlickrJsonData getFlickrJsonData = new GetFlickrJsonData(this, "https://api.flickr.com/services/feeds/photos_public.gne", "en-us", true);
 //        getFlickrJsonData.executeOnSameThread("android, oreo");
-       getFlickrJsonData.execute("android,oreo");
+       getFlickrJsonData.execute("");
         Log.d(TAG, "onResume ends");
     }
 
@@ -65,6 +65,11 @@ public class MainActivity extends BaseActivity implements GetFlickrJsonData.OnDa
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.action_search) {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
             return true;
         }
 

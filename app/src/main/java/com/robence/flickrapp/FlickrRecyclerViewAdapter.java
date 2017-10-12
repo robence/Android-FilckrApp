@@ -38,18 +38,25 @@ class FlickrRecyclerViewAdapter extends RecyclerView.Adapter<FlickrRecyclerViewA
     public void onBindViewHolder(FlickrRecyclerViewAdapter.FlickrImageViewHolder holder, int position) {
         //Called by the layout manager when it wants new data in an existing row
 
-        Photo photoItem = mPhotoList.get(position);
-        holder.title.setText(photoItem.getTitle());
-        Log.d(TAG, "onBindViewHolder: " + photoItem.getTitle() + "--> " + position);
-        Picasso.with(mContext).load(photoItem.getImage())
-                .error(R.drawable.ic_image_black_48dp)
-                .placeholder(R.drawable.ic_image_black_48dp)
-                .into(holder.thumbnail);
+        if (mPhotoList == null || (mPhotoList.size() == 0)) {
+            holder.thumbnail.setImageResource(R.drawable.ic_image_black_48dp);
+            holder.title.setText(R.string.empty_photo);
+        } else {
+            Photo photoItem = mPhotoList.get(position);
+            Log.d(TAG, "onBindViewHolder: " + photoItem.getTitle() + "--> " + position);
+            Picasso.with(mContext).load(photoItem.getImage())
+                    .error(R.drawable.ic_image_black_48dp)
+                    .placeholder(R.drawable.ic_image_black_48dp)
+                    .into(holder.thumbnail);
+
+            holder.title.setText(photoItem.getTitle());
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return ((mPhotoList!= null) && (mPhotoList.size() != 0) ? mPhotoList.size() : 0);
+        return ((mPhotoList!= null) && (mPhotoList.size() != 0) ? mPhotoList.size() : 1);
     }
 
     void loadNewData(List<Photo> newPhotos) {

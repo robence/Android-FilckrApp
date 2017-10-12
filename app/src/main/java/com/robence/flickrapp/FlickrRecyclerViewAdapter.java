@@ -2,7 +2,6 @@ package com.robence.flickrapp;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +42,7 @@ class FlickrRecyclerViewAdapter extends RecyclerView.Adapter<FlickrRecyclerViewA
         Log.d(TAG, "onBindViewHolder: " + photoItem.getTitle() + "--> " + position);
         Picasso.with(mContext).load(photoItem.getImage())
                 .error(R.drawable.ic_image_black_48dp)
+                .placeholder(R.drawable.ic_image_black_48dp)
                 .into(holder.thumbnail);
     }
 
